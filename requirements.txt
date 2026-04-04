@@ -1,0 +1,17 @@
+﻿# BuddhaKG-SSD v3.0 Dependencies
+# Core
+requests>=2.28
+jieba>=0.42
+
+# Knowledge Graph
+neo4j>=5.0
+pykeen>=1.10
+torch>=2.0
+
+# Analysis
+scikit-learn>=1.2
+numpy>=1.24
+pandas>=2.0
+
+# Optional
+matplotlib>=3.7

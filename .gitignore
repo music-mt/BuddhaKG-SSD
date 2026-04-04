@@ -1,0 +1,39 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# 資料目錄（不上傳）
+corpus_cache/
+usage_corpus/
+embeddings/
+clusters/
+kwic_results/
+kg_output/
+qa_output/
+pykeen_output/
+logs/
+
+# 報告（選擇性上傳）
+reports/*.json
+
+# 環境
+.env
+*.env
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# 系統
+.DS_Store
+Thumbs.db
+
+# 論文草稿
+paper_*.md
+paper_*.docx
+*初稿*
