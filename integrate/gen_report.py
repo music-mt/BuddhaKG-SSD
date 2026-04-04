@@ -56,5 +56,5 @@ if __name__ == "__main__":
     report = generate_report(config, corpus_def)
     out = config.REPORT_DIR / f"integrated_report_{corpus_def.name}.md"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(report, encoding="utf-8")
+    out.write_text(report, encoding="utf-8-sig")
     print(report)
