@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 class Neo4jManager:
     def __init__(self, uri, user, password):
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
-        logger.info(f"Neo4j 連線: {uri}")
+        log.info(f"Neo4j 連線: {uri}")
 
     def close(self):
         self.driver.close()
@@ -53,13 +53,13 @@ class Neo4jManager:
             try:
                 self.run(c)
             except Exception as e:
-                logger.debug(f"約束已存在或略過: {e}")
+                log.debug(f"約束已存在或略過: {e}")
         for idx in indexes:
             try:
                 self.run(idx)
             except Exception as e:
-                logger.debug(f"索引已存在或略過: {e}")
-        logger.info("✔ Schema 初始化完成")
+                log.debug(f"索引已存在或略過: {e}")
+        log.info("✔ Schema 初始化完成")
 
     # ── 建立論典節點 ────────────────────────────────────────────
     def upsert_work(self, work: str, meta: dict):
@@ -89,7 +89,7 @@ class Neo4jManager:
             MATCH (t:Text {id: r.work})
             MERGE (t)-[:HAS_JUAN]->(j)
         """, rows, CONFIG["BATCH_SIZE"])
-        logger.info(f"  ✔ 卷節點寫入: {len(rows)} 卷")
+        log.info(f"  ✔ 卷節點寫入: {len(rows)} 卷")
 
     # ── 建立術語節點 ────────────────────────────────────────────
     def upsert_terms_batch(self, term_rows: list):
@@ -102,7 +102,7 @@ class Neo4jManager:
                 t.is_seed    = r.is_seed,
                 t.juans      = r.juans
         """, term_rows, CONFIG["BATCH_SIZE"])
-        logger.info(f"  ✔ 術語節點寫入: {len(term_rows)} 個")
+        log.info(f"  ✔ 術語節點寫入: {len(term_rows)} 個")
 
     # ── 建立術語-卷關係 ─────────────────────────────────────────
     def upsert_term_juan_rels(self, rel_rows: list):
@@ -112,7 +112,7 @@ class Neo4jManager:
             MATCH (juan:Juan {id: r.juan_id})
             MERGE (term)-[:APPEARS_IN {count: r.count}]->(juan)
         """, rel_rows, CONFIG["BATCH_SIZE"])
-        logger.info(f"  ✔ 術語-卷關係寫入: {len(rel_rows)} 條")
+        log.info(f"  ✔ 術語-卷關係寫入: {len(rel_rows)} 條")
 
     # ── 建立術語-論典關係 ────────────────────────────────────────
     def upsert_term_text_rels(self, work: str, term_ids: list):
@@ -138,7 +138,7 @@ class Neo4jManager:
             MATCH (t:Text {id: $work})
             DETACH DELETE t
         """, work=work)
-        logger.info(f"✔ 已清除 {work} 所有節點")
+        log.info(f"✔ 已清除 {work} 所有節點")
 
     # ── 跨文本橋接 ──────────────────────────────────────────────
     def build_bridges(self):
@@ -153,8 +153,8 @@ class Neo4jManager:
             """, name1=name1, work1=work1, name2=name2, work2=work2, note=note)
             if result and result[0]['cnt']:
                 count += result[0]['cnt']
-                logger.info(f"  橋接: {name1}({work1}) -{rel_type}-> {name2}({work2})")
-        logger.info(f"✔ 橋接關係建立完成，共 {count} 條")
+                log.info(f"  橋接: {name1}({work1}) -{rel_type}-> {name2}({work2})")
+        log.info(f"✔ 橋接關係建立完成，共 {count} 條")
 
     # ── 統計 ────────────────────────────────────────────────────
     def stats(self):
