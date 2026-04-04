@@ -31,6 +31,9 @@ class CorpusManager:
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             juans = data.get("juans", {})
+            if not juans:
+                juan_keys = [k for k in data.keys() if k.isdigit()]
+                juans = {k: data[k] for k in juan_keys}
             if juans:
                 first_val = next(iter(juans.values()))
                 return isinstance(first_val, str) and len(first_val) > 100
@@ -43,7 +46,13 @@ class CorpusManager:
         if not path.exists():
             return None
         with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
+            data = json.load(f)
+        if "juans" in data:
+            return data
+        juan_keys = [k for k in data.keys() if k.isdigit()]
+        if juan_keys:
+            return {"juans": {k: data[k] for k in juan_keys}}
+        return data
 
     def _strip_html(self, html: str) -> str:
         html = re.sub(r'<head[^>]*>.*?</head>', '', html, flags=re.DOTALL)
