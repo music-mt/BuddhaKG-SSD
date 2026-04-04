@@ -132,7 +132,7 @@ def extract_terms(juan_texts: dict, work: str) -> tuple:
 
 
 
-def build_work(neo4j: Neo4jManager, cache: CorpusCache,
+def build_work(neo4j, cache,
                work: str, juan_start: int, juan_end: int, mode: str):
     """
     完整建圖流程：
