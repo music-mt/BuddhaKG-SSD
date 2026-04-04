@@ -174,7 +174,7 @@ def main():
 
     corpus = load_all_corpus()
     if not corpus:
-        log.error("無法載入語料，請確認 C:\\buddha\\corpus_cache\\ 存在")
+        log.error("無法載入語料，請確認 corpus_cache (CORPUS_CACHE_DIR) 存在")
         sys.exit(1)
 
     summary = {}
