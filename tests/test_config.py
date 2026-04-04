@@ -59,7 +59,7 @@ class TestCorpusDefinitions:
         assert len(corpora.load("yogacara").texts) == 4
     def test_char_counts(self):
         c = corpora.load("yogacara")
-        assert c.texts["T0676"].char_count == 31145
+        assert c.texts["T0676"].char_count == 42325
         assert c.texts["T1579"].char_count == 1053602
         assert c.texts["T1585"].char_count == 106000
         assert c.texts["T1594"].char_count == 31145

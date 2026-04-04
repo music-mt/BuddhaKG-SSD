@@ -14,7 +14,7 @@ PAPER_CLAIMS = {
     "abstract_final_prec": 0.74,
     "sec42_v12_mrr": 0.3712,
     "sec42_v13_mrr": 0.3284,
-    "table1_T0676": 31145,
+    "table1_T0676": 42325,
     "table1_T1579": 1053602,
     "table1_T1585": 106000,
     "table1_T1594": 31145,

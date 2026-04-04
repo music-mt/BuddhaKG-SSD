@@ -17,7 +17,7 @@ def build() -> CorpusDef:
             "T0676": TextDef(
                 work_id="T0676", title="解深密經",
                 title_en="Saṃdhinirmocana-sūtra",
-                juans=5, char_count=31145, role="source",
+                juans=5, char_count=42325, role="source",
                 school="yogacara", translator="玄奘",
                 notes="義理源頭",
             ),
